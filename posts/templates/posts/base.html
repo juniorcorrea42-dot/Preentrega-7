@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog de Energías Renovables</title>
+    <!-- Enlace al archivo CSS estático -->
+    <link rel="stylesheet" href="{% static 'posts/css/estilos.css' %}">
+</head>
+<body>
+    <header class="header">
+        <h1>Renovables Italia Blog</h1>
+        <nav class="navbar">
+            <a href="{% url 'inicio' %}">Inicio</a>
+            <a href="{% url 'acerca_de' %}">Acerca de</a>
+            <a href="{% url 'contacto' %}">Contacto</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <!-- Bloque donde las páginas hijas inyectarán su contenido -->
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 Junior Correa - Posgrado en Energías Renovables</p>
+    </footer>
+</body>
+</html>
