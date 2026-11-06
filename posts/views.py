@@ -1,8 +1,8 @@
 from django.shortcuts import render
+from .models import Post
 
 def inicio(request):
     return render(request, "posts/inicio.html")
-
 
 def lista_posts(request):
     posts = [
@@ -43,6 +43,15 @@ def detalle_post(request, post_id):
 def contacto(request):
     return render(request, "posts/contacto.html")
 
-def acerca_de(request):
-    return render(request, "posts/acerca_de.html")
+def acerca(request):
+    return render(request, "posts/acerca.html")
 
+def lista_posts(request):
+    # Consulta a la base de datos mediante el ORM
+    posts = Post.objects.filter(estado="publicado").order_by("-fecha_creacion")
+    
+    context = {
+        "posts": posts
+    }
+    
+    return render(request, "posts/lista_posts.html", context)
