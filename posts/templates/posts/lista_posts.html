@@ -5,14 +5,32 @@
 {% block content %}
     <h2>Listado de posts</h2>
 
-    <ul>
+    <div class="posts-container">
         {% for post in posts %}
-            <li>
-                <a href="{% url 'detalle_post' post.id %}">
-                    {{ post.titulo }}
-                </a>
-                - {{ post.autor }}
-            </li>
+            <article style="margin-bottom: 30px; border-bottom: 1px solid #eee; padding-bottom: 20px;">
+                <!-- Título con enlace al detalle -->
+                <h3>
+                    <a href="{% url 'detalle_post' post.id %}">
+                        {{ post.titulo }}
+                    </a>
+                </h3>
+
+                <!-- Datos extra (Autor, Fecha y Estado) -->
+                <p style="color: #666; font-size: 0.9em;">
+                    Por: <strong>{{ post.autor }}</strong> | 
+                    Fecha: {{ post.fecha_creacion|date:"d/m/Y" }} | 
+                    Estado: <span>{{ post.estado }}</span>
+                </p>
+
+                <!-- Contenido del post -->
+                <!-- El filtro |linebreaks mantiene los párrafos que escribas en el admin -->
+                <div class="post-contenido">
+                    {{ post.contenido|linebreaks }}
+                </div>
+            </article>
+        {% empty %}
+            <!-- Esto se muestra si no hay publicaciones en la base de datos -->
+            <p>No hay publicaciones disponibles en este momento.</p>
         {% endfor %}
-    </ul>
+    </div>
 {% endblock %}
